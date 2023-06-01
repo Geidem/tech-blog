@@ -11,10 +11,13 @@ router.get('/', withAuth, (req, res) => {
     })
     .then(dbPostData => {
         // serialize data before passing to template
-        const posts = dbPostData.map(post => post.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: true });
-    }
-    )
+        const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+        res.render('allPostsAdmin', { 
+            layout: 'dashboard',
+            posts,
+    });
+})
     .catch(err => {
         console.log(err);
         res.redirect('login');
@@ -24,7 +27,9 @@ router.get('/', withAuth, (req, res) => {
 //GET new post form
 
 router.get('/new', (req, res) => {
-    res.render('new-post');
+    res.render('new-post' , {
+        layout: 'dashboard'
+    });
 });
 
 // GET one post for dashboard
@@ -34,7 +39,11 @@ router.get('/edit/:id', withAuth, (req, res) => {
     .then(dbPostData => {
         if(dbPostData) {
             const post = dbPostData.get({ plain: true });
-            res.render('edit-post', { post, loggedIn: true });
+
+            res.render('edit-post', {
+                layout: 'dashboard',
+                post,
+            });
         } else {
             res.status(404).end();
         }
