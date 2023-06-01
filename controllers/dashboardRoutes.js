@@ -21,6 +21,12 @@ router.get('/', withAuth, (req, res) => {
     });
 });
 
+//GET new post form
+
+router.get('/new', (req, res) => {
+    res.render('new-post');
+});
+
 // GET one post for dashboard
 
 router.get('/edit/:id', withAuth, (req, res) => {
@@ -34,9 +40,13 @@ router.get('/edit/:id', withAuth, (req, res) => {
         }
     })
     .catch(err => {
-        res.status
+        res.status(500).json(err);
     });
 });
+
+module.exports = router;
+
+
 
     
 
