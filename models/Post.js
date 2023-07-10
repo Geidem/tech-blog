@@ -5,12 +5,19 @@ class Post extends Model {}
 
 Post.init(
     {
-        title: DataTypes.STRING,
-        body: DataTypes.STRING,
+        title: {
+         type: DataTypes.STRING,
+            allowNull: true,
+    },
+        body: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     },
     {
         sequelize,
     }
+
 );
 
 module.exports = Post;
