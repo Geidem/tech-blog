@@ -11,15 +11,15 @@ const loginFormHandler = async (event) => {
             password: password.value,
         }),
         headers: { 'Content-Type': 'application/json' },
-    })
-    .then(response => {
+    });
+    if (response.ok) {
         document.location.replace('/dashboard');
-    })
-    .catch(err => {
-        console.log(err);
+    } else {
+        let result = await response.json();
+        alert(result.message);
     }
-    );
 };
+   
 
 document
     .querySelector('.login-form')

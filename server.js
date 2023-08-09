@@ -4,6 +4,8 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers/');
+const helpers = require('./utils/helpers');
+
 
 
 const app = express();
@@ -23,13 +25,7 @@ const sess = {
 };
 
 
-const hbs = exphbs.create({
-  helpers: {
-    format_date: date => {
-      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-    }
-  }
-});
+const hbs = exphbs.create({ helpers });
 
 app.use(express.static(path.join(__dirname, "public")));
 
